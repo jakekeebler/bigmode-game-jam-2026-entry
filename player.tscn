@@ -1,32 +1,87 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn6cg0sr3elw8"]
+[gd_scene load_steps=13 format=3 uid="uid://cn6cg0sr3elw8"]
 
-[ext_resource type="Texture2D" uid="uid://c6rwxtgpt4lkc" path="res://assets/player_placeholder.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://yubtgk0h7ai8" path="res://player.gd" id="1_hqtel"]
+[ext_resource type="Texture2D" uid="uid://ca0b3qq5d2nn4" path="res://assets/player/jump_placeholder2.png" id="2_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://bocri6iy2k6i3" path="res://assets/player/poppyidleright.png" id="2_sweqy"]
 [ext_resource type="PackedScene" uid="uid://ddrgd141iqqmu" path="res://scenes/components/gravity_component.tscn" id="3_sweqy"]
 [ext_resource type="PackedScene" uid="uid://dr1f148crdnaw" path="res://scenes/components/input_component.tscn" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://ddbow7bevt7xw" path="res://assets/player/jump_placeholder1.png" id="4_nvl01"]
+[ext_resource type="Texture2D" uid="uid://dq31kb2atu1vf" path="res://assets/player/run_placeholder.png" id="5_n7ghd"]
 [ext_resource type="PackedScene" uid="uid://b61i2lwqdyc4c" path="res://scenes/components/movement_component.tscn" id="5_sweqy"]
+[ext_resource type="PackedScene" uid="uid://batmjc2j5uvdm" path="res://scenes/components/animation_component.tscn" id="7_dw050"]
+[ext_resource type="PackedScene" uid="uid://cpgn71mk262re" path="res://scenes/components/advanced_jump_component.tscn" id="10_n7ghd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2hs0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n7ghd")
+}],
+"loop": true,
+"name": &"fall_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sweqy")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_nvl01")
+}],
+"loop": true,
+"name": &"jump_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_n7ghd")
+}],
+"loop": true,
+"name": &"run_right",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jxqw"]
-height = 144.0
+radius = 15.0
+height = 124.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "jump_component")]
 script = ExtResource("1_hqtel")
-gravity_component = NodePath("GravityComponent")
-input_component = NodePath("InputComponent")
-movement_component = NodePath("MovementComponent")
+gravity_component = NodePath("Components/GravityComponent")
+input_component = NodePath("Components/InputComponent")
+movement_component = NodePath("Components/MovementComponent")
+animation_component = NodePath("Components/AnimationComponent")
+jump_component = NodePath("Components/AdvancedJumpComponent")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_4flbx")
-offset = Vector2(0, -80)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -77)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_2hs0m")
+animation = &"jump_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -72)
+position = Vector2(0, -62)
 shape = SubResource("CapsuleShape2D_1jxqw")
 
-[node name="GravityComponent" parent="." instance=ExtResource("3_sweqy")]
+[node name="Components" type="Node" parent="."]
 
-[node name="InputComponent" parent="." instance=ExtResource("4_2hs0m")]
+[node name="GravityComponent" parent="Components" instance=ExtResource("3_sweqy")]
 
-[node name="MovementComponent" parent="." instance=ExtResource("5_sweqy")]
+[node name="InputComponent" parent="Components" instance=ExtResource("4_2hs0m")]
+
+[node name="MovementComponent" parent="Components" instance=ExtResource("5_sweqy")]
+
+[node name="AnimationComponent" parent="Components" node_paths=PackedStringArray("sprite") instance=ExtResource("7_dw050")]
+sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="AdvancedJumpComponent" parent="Components" instance=ExtResource("10_n7ghd")]
