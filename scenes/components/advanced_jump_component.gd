@@ -7,7 +7,7 @@ extends Node
 
 @export_subgroup("Settings")
 @export var jump_velocity: float = -650.00
-@export var wall_jump_velocity: float = -1000.00
+@export var wall_jump_velocity: float = -400.00
 
 var is_going_up: bool = false
 var is_jumping: bool = false

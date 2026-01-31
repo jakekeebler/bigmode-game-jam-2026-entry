@@ -2,5 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b4k15glulemsw" path="res://scenes/components/gravity_component.gd" id="1_45p7f"]
 
-[node name="GravityComponent" type="Node"]
+[node name="GravityComponent" type="Node" node_paths=PackedStringArray("wall_slide_momentum_timer")]
 script = ExtResource("1_45p7f")
+wall_slide_momentum_timer = NodePath("WallSlideMomentum")
+
+[node name="WallSlideMomentum" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="WallSlideMomentum" to="." method="_on_wall_slide_momentum_timeout"]
