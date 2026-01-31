@@ -1,21 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn6cg0sr3elw8"]
+[gd_scene load_steps=15 format=3 uid="uid://cn6cg0sr3elw8"]
 
 [ext_resource type="Script" uid="uid://yubtgk0h7ai8" path="res://player.gd" id="1_hqtel"]
-[ext_resource type="Texture2D" uid="uid://ca0b3qq5d2nn4" path="res://assets/player/jump_placeholder2.png" id="2_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://dssq6pthw71xn" path="res://assets/player/fall_right.png" id="2_nvl01"]
 [ext_resource type="Texture2D" uid="uid://bocri6iy2k6i3" path="res://assets/player/poppyidleright.png" id="2_sweqy"]
+[ext_resource type="Texture2D" uid="uid://bxv7ysl1k80w4" path="res://assets/player/jump_right.png" id="3_n7ghd"]
 [ext_resource type="PackedScene" uid="uid://ddrgd141iqqmu" path="res://scenes/components/gravity_component.tscn" id="3_sweqy"]
 [ext_resource type="PackedScene" uid="uid://dr1f148crdnaw" path="res://scenes/components/input_component.tscn" id="4_2hs0m"]
-[ext_resource type="Texture2D" uid="uid://ddbow7bevt7xw" path="res://assets/player/jump_placeholder1.png" id="4_nvl01"]
-[ext_resource type="Texture2D" uid="uid://dq31kb2atu1vf" path="res://assets/player/run_placeholder.png" id="5_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://bi260uwm143ej" path="res://assets/player/run_right.png" id="4_nvl01"]
+[ext_resource type="Texture2D" uid="uid://c70xxfv8eiqpj" path="res://assets/player/wall_slide_right.png" id="5_ivps1"]
 [ext_resource type="PackedScene" uid="uid://b61i2lwqdyc4c" path="res://scenes/components/movement_component.tscn" id="5_sweqy"]
 [ext_resource type="PackedScene" uid="uid://batmjc2j5uvdm" path="res://scenes/components/animation_component.tscn" id="7_dw050"]
 [ext_resource type="PackedScene" uid="uid://cpgn71mk262re" path="res://scenes/components/advanced_jump_component.tscn" id="10_n7ghd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b26j0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2hs0m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_n7ghd")
+"texture": ExtResource("2_nvl01")
 }],
 "loop": true,
 "name": &"fall_right",
@@ -31,29 +34,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_nvl01")
+"texture": ExtResource("3_n7ghd")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_b26j0")
 }],
 "loop": true,
 "name": &"jump_right",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_n7ghd")
+"texture": ExtResource("4_nvl01")
 }],
 "loop": true,
 "name": &"run_right",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ivps1")
+}],
+"loop": true,
+"name": &"wall_slide_right",
+"speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jxqw"]
-radius = 15.0
-height = 124.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvl01"]
+size = Vector2(47, 133)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "jump_component")]
 script = ExtResource("1_hqtel")
@@ -64,14 +72,14 @@ animation_component = NodePath("Components/AnimationComponent")
 jump_component = NodePath("Components/AdvancedJumpComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2, -77)
+position = Vector2(-2, -75)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_2hs0m")
-animation = &"jump_right"
+animation = &"wall_slide_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -62)
-shape = SubResource("CapsuleShape2D_1jxqw")
+position = Vector2(-0.5, -65.5)
+shape = SubResource("RectangleShape2D_nvl01")
 
 [node name="Components" type="Node" parent="."]
 

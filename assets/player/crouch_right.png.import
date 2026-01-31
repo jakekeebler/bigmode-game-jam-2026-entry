@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq31kb2atu1vf"
-path="res://.godot/imported/run_placeholder.png-2e5048ad2432ef96a7deabb24f40c92f.ctex"
+uid="uid://d0kff0bbm5ra7"
+path="res://.godot/imported/crouch_right.png-decbe88e8cada5268fcab1c4206b9370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/run_placeholder.png"
-dest_files=["res://.godot/imported/run_placeholder.png-2e5048ad2432ef96a7deabb24f40c92f.ctex"]
+source_file="res://assets/player/crouch_right.png"
+dest_files=["res://.godot/imported/crouch_right.png-decbe88e8cada5268fcab1c4206b9370.ctex"]
 
 [params]
 
