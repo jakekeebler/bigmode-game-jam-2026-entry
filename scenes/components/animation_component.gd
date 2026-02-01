@@ -11,16 +11,27 @@ func handle_horizontal_sprite(move_direction: float) -> void:
 	#change this later. need to have use left animations as well
 	sprite.flip_h = false if move_direction > 0 else true
 
-func handle_move_animation(move_direction: float) -> void:
+func handle_move_animation(body: CharacterBody2D, move_direction: float) -> void:
 	handle_horizontal_sprite(move_direction)
 	
 	if move_direction != 0:
 		sprite.play("run_right")
-	else:
+	elif move_direction == 0 and body.is_on_floor():
 		sprite.play("idle_right")
+	elif move_direction == 0 and not body.is_on_floor():
+		sprite.play("fall_right")
 
-func handle_jump_animation(is_jumping: bool, is_falling: bool) -> void:
+func handle_jump_animation(body: CharacterBody2D, is_jumping: bool, is_falling: bool) -> void:
 	if is_jumping:
 		sprite.play("jump_right")
 	elif is_falling:
 		sprite.play("fall_right")
+	elif is_falling == false and is_jumping == false and not body.is_on_floor():
+		sprite.play("fall_right")
+	elif body.velocity == Vector2.ZERO and not body.is_on_floor():
+		sprite.play("fall_right")
+	
+
+func handle_wall_slide_animation(body: CharacterBody2D, is_sliding: bool) -> void:
+	if is_sliding and body.velocity.y > 0:
+		sprite.play("wall_slide_right")

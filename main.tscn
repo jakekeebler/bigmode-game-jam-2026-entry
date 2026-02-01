@@ -38,7 +38,8 @@ texture = ExtResource("3_h2yge")
 6:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_lquwl"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 
 [node name="Node2D" type="Node2D"]

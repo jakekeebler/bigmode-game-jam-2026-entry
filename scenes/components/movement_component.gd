@@ -2,7 +2,7 @@ class_name MovementComponent
 extends Node
 
 @export_subgroup("Settings")
-@export var speed: float = 250
+@export var speed: float = 325
 @export var ground_accel_speed: float = 18.0
 @export var ground_decel_speed: float = 12.0
 @export var air_accel_speed: float = 11.0

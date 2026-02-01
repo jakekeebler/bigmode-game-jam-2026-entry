@@ -72,7 +72,7 @@ func jump(body: CharacterBody2D) -> void:
 		coyote_timer.stop()
 		
 func wall_jump(body: CharacterBody2D, direction: float) -> void:
-	if is_wall_sliding == true:
+	if is_wall_sliding == true and direction != 0:
 		body.velocity.y = jump_velocity
 		body.velocity.x = wall_jump_velocity * direction
 	
