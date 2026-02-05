@@ -16,3 +16,6 @@ func get_jump_input_released() -> bool:
 
 func get_sword_throw_input() -> bool:
 	return Input.is_action_just_pressed("sword")
+
+func get_whip_input() -> bool:
+	return Input.is_action_just_pressed("whip")

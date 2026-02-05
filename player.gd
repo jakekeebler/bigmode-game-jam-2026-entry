@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var sword: CharacterBody2D = $Sword
+@onready var whip: Area2D = $Whip
 
 @export_subgroup("Nodes")
 @export var gravity_component: GravityComponent
@@ -18,7 +19,10 @@ func _physics_process(delta: float) -> void:
 	jump_component.handle_wall_jump(self, input_component.get_jump_input(), input_component.input_horizontal)
 	animation_component.handle_jump_animation(self, jump_component.is_going_up, gravity_component.is_falling)
 	animation_component.handle_wall_slide_animation(self, gravity_component.is_wall_sliding)
-	player_attack_component.handle_throw_sword(sword, input_component.get_sword_throw_input(), input_component.input_aim_direction)
+	animation_component.handle_sword_throw_animation(self, player_attack_component.sword_just_thrown)
+	player_attack_component.handle_throw_sword(sword, self, input_component.get_sword_throw_input(), input_component.input_aim_direction)
+	player_attack_component.handle_whip_attack(whip, self, input_component.get_whip_input(), input_component.input_aim_direction)
+	
 	
 	sword.move_and_slide()
 	move_and_slide()

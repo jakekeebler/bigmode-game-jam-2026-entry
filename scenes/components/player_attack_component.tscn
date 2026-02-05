@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://b08oo162dd7xr"]
+[gd_scene load_steps=5 format=3 uid="uid://b08oo162dd7xr"]
 
 [ext_resource type="Script" uid="uid://ca2270ldmqacd" path="res://scenes/components/player_attack_component.gd" id="1_n3c02"]
+[ext_resource type="Script" uid="uid://c4mk0astq45lq" path="res://scripts/stats.gd" id="2_4eke4"]
+[ext_resource type="Shape2D" uid="uid://dydugh6mj224r" path="res://assets/player/whip.tres" id="3_as26u"]
 
-[node name="PlayerAttackComponent" type="Node"]
+[sub_resource type="Resource" id="Resource_as26u"]
+script = ExtResource("2_4eke4")
+health = 1
+damage = 1
+defense = 1
+faction = 0
+metadata/_custom_type_script = "uid://c4mk0astq45lq"
+
+[node name="PlayerAttackComponent" type="Node" node_paths=PackedStringArray("sword_throw_timer", "whip_timer", "transformer")]
 script = ExtResource("1_n3c02")
+sword_throw_timer = NodePath("SwordThrowTimer")
+whip_timer = NodePath("WhipTimer")
+stats = SubResource("Resource_as26u")
+hitbox_shape = ExtResource("3_as26u")
+transformer = NodePath("WhipTransform")
+
+[node name="SwordThrowTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[node name="WhipTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WhipTransform" type="Node2D" parent="."]
+position = Vector2(60, -80)
+
+[connection signal="timeout" from="SwordThrowTimer" to="." method="_on_sword_throw_timer_timeout"]

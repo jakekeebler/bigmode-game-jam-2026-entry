@@ -15,6 +15,11 @@ run/main_scene="uid://chhbebjq21yiw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Player="*res://player.tscn"
+Whip="*res://whip.tscn"
+
 [display]
 
 window/size/viewport_width=1280

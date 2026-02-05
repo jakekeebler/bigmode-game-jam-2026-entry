@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cn6cg0sr3elw8"]
+[gd_scene load_steps=27 format=3 uid="uid://cn6cg0sr3elw8"]
 
 [ext_resource type="Script" uid="uid://yubtgk0h7ai8" path="res://player.gd" id="1_hqtel"]
 [ext_resource type="Texture2D" uid="uid://dssq6pthw71xn" path="res://assets/player/fall_right.png" id="2_nvl01"]
@@ -13,8 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://udolkg4g6ouh" path="res://assets/player/poppyrunR4.png" id="7_u1c27"]
 [ext_resource type="Texture2D" uid="uid://dvyq6te211vv1" path="res://assets/player/poppyrunR5.png" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://bm1pv28mekrwn" path="res://assets/player/poppywallL1.png" id="9_bwjto"]
+[ext_resource type="Texture2D" uid="uid://dh7gj3l52l1w0" path="res://assets/player/poppythrowR1.png" id="9_q13i1"]
 [ext_resource type="PackedScene" uid="uid://cpgn71mk262re" path="res://scenes/components/advanced_jump_component.tscn" id="10_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://ddgcxapola05w" path="res://assets/player/poppythrowR2.png" id="10_pylmc"]
+[ext_resource type="Texture2D" uid="uid://cqc382lax2kpo" path="res://assets/player/poppywhipattackR1.png" id="12_pylmc"]
+[ext_resource type="Texture2D" uid="uid://q00o1ckhflpl" path="res://assets/player/poppywhipattackR2.png" id="13_5tmop"]
+[ext_resource type="Texture2D" uid="uid://cbu3xiqu5qhy5" path="res://assets/player/poppywhipattackUP.png" id="14_7lmhl"]
 [ext_resource type="PackedScene" uid="uid://7vmmbyvpqf3f" path="res://scenes/sword.tscn" id="15_606se"]
+[ext_resource type="Texture2D" uid="uid://by0o7g8h20fy4" path="res://assets/player/poppywhipattackDIAGONAL_R.png" id="15_dx0e4"]
 [ext_resource type="PackedScene" uid="uid://b08oo162dd7xr" path="res://scenes/components/player_attack_component.tscn" id="15_u1c27"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b26j0"]
@@ -73,15 +79,58 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("9_q13i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_pylmc")
+}],
+"loop": true,
+"name": &"throw_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("9_bwjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_pylmc")
 }],
 "loop": true,
 "name": &"wall_slide_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_pylmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5tmop")
+}],
+"loop": true,
+"name": &"whip_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_7lmhl")
+}],
+"loop": true,
+"name": &"whip_upR",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_dx0e4")
+}],
+"loop": true,
+"name": &"whip_upright",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvl01"]
 size = Vector2(47, 133)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ahtn"]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gravity_component", "input_component", "movement_component", "animation_component", "jump_component", "player_attack_component")]
 script = ExtResource("1_hqtel")
@@ -93,11 +142,10 @@ jump_component = NodePath("Components/AdvancedJumpComponent")
 player_attack_component = NodePath("Components/PlayerAttackComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2, -75)
+position = Vector2(0, -70)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_2hs0m")
-animation = &"run_right"
-frame_progress = 0.0399616
+animation = &"whip_upright"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -65.5)
@@ -117,6 +165,7 @@ sprite = NodePath("../../AnimatedSprite2D")
 [node name="AdvancedJumpComponent" parent="Components" instance=ExtResource("10_n7ghd")]
 
 [node name="PlayerAttackComponent" parent="Components" instance=ExtResource("15_u1c27")]
+hitbox_shape = SubResource("RectangleShape2D_7ahtn")
 
 [node name="Sword" parent="." instance=ExtResource("15_606se")]
 position = Vector2(0, -88)

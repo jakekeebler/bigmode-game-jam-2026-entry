@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7vmmbyvpqf3f"]
+[gd_scene load_steps=6 format=3 uid="uid://7vmmbyvpqf3f"]
 
 [ext_resource type="Texture2D" uid="uid://pipg3p28miq1" path="res://assets/sword.png" id="2_k5whp"]
 [ext_resource type="PackedScene" uid="uid://dr1f148crdnaw" path="res://scenes/components/input_component.tscn" id="2_s4ec8"]
@@ -8,16 +8,18 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_1yp6w"]
 radius = 20.2237
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n355p"]
+size = Vector2(50, 50)
+
 [node name="Sword" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 130
+collision_mask = 130
 
 [node name="ClingBox" type="CollisionShape2D" parent="."]
 visibility_layer = 2
 shape = SubResource("RectangleShape2D_k5whp")
 
 [node name="GrappleBox" type="CollisionShape2D" parent="."]
-visibility_layer = 2
 shape = SubResource("CircleShape2D_1yp6w")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -25,3 +27,10 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_k5whp")
 
 [node name="InputComponent" parent="." instance=ExtResource("2_s4ec8")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_n355p")

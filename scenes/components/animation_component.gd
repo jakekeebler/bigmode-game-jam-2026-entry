@@ -35,3 +35,7 @@ func handle_jump_animation(body: CharacterBody2D, is_jumping: bool, is_falling: 
 func handle_wall_slide_animation(body: CharacterBody2D, is_sliding: bool) -> void:
 	if is_sliding and body.velocity.y > 0:
 		sprite.play("wall_slide_right")
+
+func handle_sword_throw_animation(body: CharacterBody2D, is_throwing: bool) -> void:
+	if is_throwing:
+		sprite.play("throw_right")

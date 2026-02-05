@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://1q17p5kxwsyg"]
+
+[ext_resource type="Texture2D" uid="uid://cpx3442bqh2og" path="res://assets/player/begin_run_right.png" id="2_fag8t"]
+
+[sub_resource type="GDScript" id="GDScript_4q070"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body: Node2D) -> void:
+	print(\"please 1\")
+
+
+func _on_area_entered(area: Area2D) -> void:
+	print(\"please 2ad\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ov760"]
+size = Vector2(243, 43)
+
+[node name="Whip" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = SubResource("GDScript_4q070")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(165, 0.5)
+shape = SubResource("RectangleShape2D_ov760")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(162, 2.00003)
+scale = Vector2(2.11562, 0.08125)
+texture = ExtResource("2_fag8t")
+
+[node name="WhipTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
